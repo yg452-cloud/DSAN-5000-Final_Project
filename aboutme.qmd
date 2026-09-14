@@ -1,0 +1,13 @@
+---
+title: "About Me"
+format:
+  html:
+    embed-resources: true
+---
+
+
+![](Yanmin-Gui.jpg){width=40%}
+
+**Graduate Student, M.S. in Data Science & Analytics (2025–2027), Georgetown University**
+
+Yanmin Gui has a strong foundation in statistics, applied mathematics, and machine learning. His work focuses on building interpretable, data-driven models to support decision-making in finance and applied analytics, covering exploratory data analysis, feature engineering, unsupervised learning, and supervised modeling. He has developed and tested quantitative strategies and volatility-based models using Python and industry platforms, and has applied tree-based methods, time-series analysis, and clustering techniques in both academic and professional contexts. His approach emphasizes structural understanding, rigorous validation, and practical relevance over black-box optimization. With a solid academic background in data science and statistics and recognition from competitive modeling contests, he continues to pursue projects at the intersection of quantitative modeling, machine learning, and real-world decision systems.

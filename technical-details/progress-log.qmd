@@ -1,0 +1,68 @@
+---
+title: "Progress log"
+---
+
+
+
+
+## Phase 1: Project Setup & Data Preparation
+
+* [x] Initialize project repository and establish analysis structure for EDA and modeling.
+* [x] Load BPA wind power dataset and inspect raw data structure.
+* [x] Identify key variables related to wind conditions and power output.
+* [x] Define ramp event labels and map numeric codes to interpretable categories.
+
+
+## Phase 2: Data Cleaning & Feature Construction
+
+* [x] Handle missing values in wind speed, power output, and volatility-related variables.
+* [x] Convert timestamps to datetime format and ensure temporal ordering.
+* [x] Construct derived features, including average wind speed and wind volatility.
+* [x] Create categorical label `Ramp_Type_Label` to distinguish stable, up-ramp, and down-ramp events.
+* [x] Verify data consistency and save cleaned dataset for analysis.
+
+
+## Phase 3: Exploratory Data Analysis (EDA)
+
+* [x] Generate summary statistics for key numerical features.
+* [x] Visualize univariate distributions of wind speed, wind volatility, and power output.
+* [x] Apply log transformation to wind power output to address skewness.
+* [x] Analyze feature correlations using a correlation matrix and heatmap.
+* [x] Create pairwise scatter plots to examine relationships between features and ramp types.
+* [x] Use annotated heatmaps to examine ramp event probabilities across wind levels.
+* [x] Identify severe class imbalance between stable periods and ramp events.
+
+
+## Phase 4: Statistical Analysis
+
+* [x] Perform chi-square tests to assess the relationship between wind levels and ramp occurrence.
+* [x] Validate that wind volatility, rather than wind speed alone, is a key driver of grid instability.
+* [x] Interpret statistical results in the context of physical wind behavior.
+
+
+## Phase 5: Modeling Preparation
+
+* [x] Address class imbalance using undersampling or other imbalance-aware strategies.
+* [x] Select volatility-focused features for predictive modeling.
+* [x] Define modeling objectives for ramp event detection and early warning.
+* [x] Choose appropriate non-linear models based on EDA findings.
+* [x] Prepare training and testing datasets.
+
+
+## xhase 6: Supervised Modeling
+
+* [x] Train non-linear classifiers (e.g., Random Forest, Gradient Boosting) to detect ramp events.
+* [x] Evaluate model performance using appropriate metrics for imbalanced data.
+* [x] Analyze feature importance to interpret model behavior.
+* [x] Compare model performance against baseline approaches.
+
+
+## Phase 7: Final Reporting & Interpretation
+
+* [x] Synthesize EDA, statistical results, and modeling outcomes into a coherent narrative.
+* [x] Draft conclusions highlighting the role of wind volatility in grid instability.
+* [x] Discuss limitations and potential extensions of the early warning system.
+* [x] Finalize figures and tables for submission-ready presentation.
+
+
+

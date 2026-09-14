@@ -1,0 +1,32 @@
+# Methods
+
+### Data Collection and Feature Construction
+
+The analysis integrates **grid-level wind power output data** with **local meteorological observations**, aligned at consistent time intervals. In addition to raw variables such as wind speed and power output, the data are transformed to capture **short-term dynamics**, including rolling changes and volatility measures. These features are designed to reflect how rapidly conditions evolve over time, which is critical for ramp detection.
+
+### Exploratory Data Analysis (EDA)
+
+Exploratory data analysis is used to establish baseline relationships and limitations of simple indicators. Scatter plots, distribution charts, and comparative visualizations are applied to examine the relationship between wind speed and power output, as well as differences between stable periods and ramp events. This step motivates the need for multi-dimensional and dynamic analysis.
+
+### Unsupervised Learning and Pattern Discovery
+
+To explore the structural behavior of ramp events relative to normal operating conditions, several **unsupervised learning models** are applied:
+
+* **Principal Component Analysis (PCA)** is used to reduce dimensionality and visualize dominant patterns in the data while preserving overall variance.
+* **t-Distributed Stochastic Neighbor Embedding (t-SNE)** is used as a complementary visualization tool to capture non-linear structure and local neighborhood relationships.
+* **K-Means clustering** is applied to examine whether ramp events form compact, separable groups.
+* **DBSCAN** is used to identify density-based structures and potential boundary or outlier states.
+* **Hierarchical clustering** is used to explore nested relationships and transition patterns across operating conditions.
+
+These models are used for **exploratory interpretation**, not for final classification. Together, they support the insight that ramp events tend to appear as **transition or edge conditions** rather than a fully distinct regime.
+
+### Supervised Modeling and Signal Evaluation
+
+Supervised models are used to evaluate which signals are most informative for identifying ramp risk:
+
+* **Logistic regression** provides a transparent baseline for distinguishing ramp versus non-ramp conditions.
+* **Tree-based models** (e.g., Random Forest or Gradient Boosting) are used to capture non-linear relationships and compare feature importance.
+
+Model outputs are interpreted qualitatively, with emphasis on **which features matter most** rather than on headline accuracy metrics. This step reinforces the role of volatility-related indicators as early warning signals.
+
+

@@ -1,0 +1,36 @@
+# Overview
+
+### Goals
+
+The primary goal of this section is to design and execute an analytical workflow that identifies **early indicators of wind power ramp events**. The work focuses on understanding how short-term variability and multi-dimensional patterns in power and weather data relate to sudden changes in wind power output, with the aim of supporting earlier and more reliable ramp risk awareness.
+
+### Motivation
+
+Wind power ramp events pose significant operational challenges due to their abrupt nature and limited reaction time. Traditional monitoring approaches that rely on static thresholds or single variables, such as wind speed, often fail to capture the onset of these events. This work is motivated by the need to move beyond simple indicators and toward a **data-driven, pattern-based framework** that can reveal emerging instability before large power swings occur. From a technical perspective, this requires integrating time-series feature construction, exploratory analysis, and both unsupervised and supervised modeling to capture non-linear and transitional behavior in the data.
+
+### Objectives
+
+To achieve these goals, this section pursues the following objectives:
+
+* Integrate and preprocess wind power and meteorological time-series data to ensure temporal consistency and analytical readiness.
+* Construct features that capture short-term dynamics and volatility relevant to ramp behavior.
+* Apply exploratory visualization and unsupervised learning methods to identify structural patterns and transition states associated with ramp events.
+* Use supervised models to evaluate the relative importance of candidate signals and validate insights derived from visual and structural analysis.
+* Produce interpretable outputs that inform which signals and patterns merit attention in downstream monitoring or early-warning applications.
+
+## Main Questions
+
+This project is structured around three core questions that guide the analysis and connect the data exploration to operational decision-making.
+
+### **Question 1: Why do simple wind-speed indicators fail to explain ramp events?**
+
+This question examines whether wind speed alone can reliably explain large and sudden changes in wind power output. It focuses on identifying the limitations of single-variable monitoring approaches and assessing the need for multi-dimensional signals when anticipating ramp risk.
+
+
+### **Question 2: Which observable signals provide early warning of ramp risk?**
+
+This question investigates whether short-term variability and dynamic features can distinguish ramp periods from stable operation before large power changes occur. The goal is to identify signals that offer earlier and more informative warnings than absolute power levels or static thresholds.
+
+### **Question 3: Do ramp events represent distinct operating regimes or transition states?**
+
+This question explores the structural nature of ramp events within the broader operating space. Using pattern discovery and clustering-oriented analysis, it assesses whether ramps form clearly separable regimes or emerge at the boundaries of normal conditions, informing how ramp risk should be monitored and interpreted.

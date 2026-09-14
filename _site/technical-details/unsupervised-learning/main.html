@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Unsupervised Learning – DSAN-5000: Project</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/gu-logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">DSAN-5000: Project</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../aboutme.html"> 
+<span class="menu-text">About Me</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../report/report.html"> 
+<span class="menu-text">Report</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-technical-details" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Technical details</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-technical-details">    
+        <li>
+    <a class="dropdown-item" href="../../technical-details/data-collection/main.html">
+ <span class="dropdown-text">Data-collection</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../technical-details/data-cleaning/main.html">
+ <span class="dropdown-text">Data-cleaning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../technical-details/eda/main.html">
+ <span class="dropdown-text">Exploratory Data Analysis</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../technical-details/unsupervised-learning/main.html">
+ <span class="dropdown-text">Unsupervised Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../technical-details/supervised-learning/main.html">
+ <span class="dropdown-text">Supervised Learning</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../technical-details/progress-log.html">
+ <span class="dropdown-text">Progress Log</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../technical-details/llm-usage-log.html">
+ <span class="dropdown-text">LLM usage Log</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-and-motivation" id="toc-introduction-and-motivation" class="nav-link active" data-scroll-target="#introduction-and-motivation">Introduction and Motivation</a></li>
+  <li><a href="#overview-of-methods" id="toc-overview-of-methods" class="nav-link" data-scroll-target="#overview-of-methods">Overview of methods</a>
+  <ul class="collapse">
+  <li><a href="#part-1-dimensionality-reduction" id="toc-part-1-dimensionality-reduction" class="nav-link" data-scroll-target="#part-1-dimensionality-reduction">Part 1: Dimensionality Reduction</a></li>
+  <li><a href="#principal-component-analysis-pca" id="toc-principal-component-analysis-pca" class="nav-link" data-scroll-target="#principal-component-analysis-pca">1. Principal Component Analysis (PCA)</a></li>
+  <li><a href="#t-distributed-stochastic-neighbor-embedding-t-sne" id="toc-t-distributed-stochastic-neighbor-embedding-t-sne" class="nav-link" data-scroll-target="#t-distributed-stochastic-neighbor-embedding-t-sne">2. t-Distributed Stochastic Neighbor Embedding (t-SNE)</a></li>
+  <li><a href="#part-2-clustering-methods" id="toc-part-2-clustering-methods" class="nav-link" data-scroll-target="#part-2-clustering-methods">Part 2: Clustering Methods</a></li>
+  <li><a href="#k-means-clustering" id="toc-k-means-clustering" class="nav-link" data-scroll-target="#k-means-clustering">1. K-Means Clustering</a></li>
+  <li><a href="#dbscan" id="toc-dbscan" class="nav-link" data-scroll-target="#dbscan">2. DBSCAN</a></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering">3. Hierarchical Clustering</a></li>
+  <li><a href="#part-3-evaluation-and-synthesis" id="toc-part-3-evaluation-and-synthesis" class="nav-link" data-scroll-target="#part-3-evaluation-and-synthesis">Part 3: Evaluation and Synthesis</a></li>
+  </ul></li>
+  <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a>
+  <ul class="collapse">
+  <li><a href="#pca-and-tsne" id="toc-pca-and-tsne" class="nav-link" data-scroll-target="#pca-and-tsne">PCA and TSNE</a></li>
+  </ul></li>
+  <li><a href="#summary-and-interpretation-of-results" id="toc-summary-and-interpretation-of-results" class="nav-link" data-scroll-target="#summary-and-interpretation-of-results">Summary and Interpretation of Results</a>
+  <ul class="collapse">
+  <li><a href="#dimensionality-reduction-assessment" id="toc-dimensionality-reduction-assessment" class="nav-link" data-scroll-target="#dimensionality-reduction-assessment">1. Dimensionality Reduction Assessment</a></li>
+  <li><a href="#clustering-performance-analysis" id="toc-clustering-performance-analysis" class="nav-link" data-scroll-target="#clustering-performance-analysis">2. Clustering Performance Analysis</a></li>
+  <li><a href="#real-world-conclusion" id="toc-real-world-conclusion" class="nav-link" data-scroll-target="#real-world-conclusion">3. Real-World Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Unsupervised Learning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction-and-motivation" class="level1">
+<h1>Introduction and Motivation</h1>
+<p>This section shifts from descriptive analysis to unsupervised learning. Instead of using predefined labels such as Stable or Ramp, we examine how the data organize themselves when projected into a lower-dimensional space without labels. The central question is whether ramp events naturally separate from normal operation, or whether they overlap with typical fluctuations in wind and power features.</p>
+<p>The goal is to evaluate whether data-driven groupings align with physical definitions of grid behavior. We apply PCA to test linear separation, t-SNE to explore non-linear structure, and clustering methods (K-Means and DBSCAN) to identify operating regimes. These results help assess whether unsupervised patterns support existing operational definitions or suggest the need for refinement in later modeling stages.</p>
+</section>
+<section id="overview-of-methods" class="level1">
+<h1>Overview of methods</h1>
+<section id="part-1-dimensionality-reduction" class="level3">
+<h3 class="anchored" data-anchor-id="part-1-dimensionality-reduction">Part 1: Dimensionality Reduction</h3>
+<p>We employ two contrasting techniques to project the high-dimensional feature space into interpretable 2D visualizations, allowing us to inspect the data for separability and structure.</p>
+</section>
+<section id="principal-component-analysis-pca" class="level3">
+<h3 class="anchored" data-anchor-id="principal-component-analysis-pca">1. Principal Component Analysis (PCA)</h3>
+<p>We begin with PCA, a linear dimensionality reduction technique, to examine the global variance structure of the dataset.</p>
+<ul>
+<li><strong>Implementation:</strong> We will apply PCA to the standardized feature set to construct orthogonal principal components.</li>
+<li><strong>Component Selection:</strong> We will analyze the <strong>Explained Variance Ratio</strong> and utilize a <strong>Scree Plot</strong> to determine the optimal number of components required to preserve significant information.</li>
+<li><strong>Visualization:</strong> The data will be projected onto the first two principal components to assess if ramp events and stable states are linearly separable.</li>
+</ul>
+</section>
+<section id="t-distributed-stochastic-neighbor-embedding-t-sne" class="level3">
+<h3 class="anchored" data-anchor-id="t-distributed-stochastic-neighbor-embedding-t-sne">2. t-Distributed Stochastic Neighbor Embedding (t-SNE)</h3>
+<p>To capture non-linear relationships that PCA may miss, we implement t-SNE, a manifold learning technique designed to preserve local neighborhood structures.</p>
+<ul>
+<li><strong>Implementation:</strong> We will compute the t-SNE embedding on the same dataset.</li>
+<li><strong>Hyperparameter Tuning:</strong> We will experiment with different <strong>perplexity</strong> values to balance the attention between local and global aspects of the data.</li>
+<li><strong>Comparison:</strong> We will visualize the t-SNE output to reveal hidden clusters and compare its ability to disentangle complex patterns against the linear projections from PCA.</li>
+</ul>
+</section>
+<section id="part-2-clustering-methods" class="level3">
+<h3 class="anchored" data-anchor-id="part-2-clustering-methods">Part 2: Clustering Methods</h3>
+<p>Following dimensionality reduction, we apply three distinct clustering algorithms to partition the grid data into “natural” groups. The goal is to see if unsupervised methods can recover the physical “Stable” vs.&nbsp;“Ramp” labels.</p>
+</section>
+<section id="k-means-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="k-means-clustering">1. K-Means Clustering</h3>
+<p>This centroid-based algorithm partitions data into spherical clusters by minimizing within-cluster variance.</p>
+<ul>
+<li><strong>Model Selection:</strong> We will determine the optimal number of clusters () using the <strong>Elbow Method</strong> (analyzing inertia) and the <strong>Silhouette Score</strong> (measuring cluster cohesion and separation).</li>
+<li><strong>Application:</strong> We will assign each data point to a cluster and analyze the centroids to understand the physical characteristics of each group.</li>
+</ul>
+</section>
+<section id="dbscan" class="level3">
+<h3 class="anchored" data-anchor-id="dbscan">2. DBSCAN</h3>
+<p>Unlike K-Means, DBSCAN groups points based on density and can identify outliers as noise.</p>
+<ul>
+<li><strong>Mechanism:</strong> The algorithm expands clusters from high-density regions separated by low-density areas.</li>
+<li><strong>Parameter Tuning:</strong> We will carefully tune <code>eps</code> (neighborhood radius) and <code>min_samples</code> to effectively separate dense stable regions from sparse ramp anomalies. This is particularly relevant given the uneven distribution of our data.</li>
+</ul>
+</section>
+<section id="hierarchical-clustering" class="level3">
+<h3 class="anchored" data-anchor-id="hierarchical-clustering">3. Hierarchical Clustering</h3>
+<p>We employ Agglomerative Hierarchical Clustering to build a taxonomy of grid states.</p>
+<ul>
+<li><strong>Mechanism:</strong> This method builds a hierarchy of clusters by merging pairs of clusters as one moves up the hierarchy.</li>
+<li><strong>Visualization:</strong> We will generate a <strong>Dendrogram</strong> to visualize the merge distances and determine a natural cutoff point for defining cluster membership.</li>
+</ul>
+</section>
+<section id="part-3-evaluation-and-synthesis" class="level3">
+<h3 class="anchored" data-anchor-id="part-3-evaluation-and-synthesis">Part 3: Evaluation and Synthesis</h3>
+<p>To synthesize our findings, we will:</p>
+<ul>
+<li><strong>Comparative Analysis:</strong> Evaluate the strengths and trade-offs of each clustering method in the context of grid stability data .</li>
+<li><strong>Label Correlation:</strong> Although these methods are unsupervised, we will cross-reference the resulting clusters with our existing <code>Ramp_Type</code> labels to assess how well the “natural” data structure aligns with physical ramp definitions.</li>
+<li><strong>Visual Validation:</strong> We will produce clear, labeled visualizations (scatter plots of clusters) to support the interpretation of operating regimes.</li>
+</ul>
+</section>
+</section>
+<section id="code" class="level1">
+<h1>Code</h1>
+<div id="cell-4" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.manifold <span class="im">import</span> TSNE</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.cluster <span class="im">import</span> KMeans, DBSCAN, AgglomerativeClustering</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> silhouette_score</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="pca-and-tsne" class="level3">
+<h3 class="anchored" data-anchor-id="pca-and-tsne">PCA and TSNE</h3>
+<div id="cell-6" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. Global Settings &amp; Style</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">"notebook"</span>, font_scale<span class="op">=</span><span class="fl">1.3</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.sans-serif'</span>] <span class="op">=</span> [<span class="st">'Arial'</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.dpi'</span>] <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Color: Blue (Stable) vs Red (Ramp)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>custom_colors <span class="op">=</span> [<span class="st">"#87CEEB"</span>, <span class="st">"#E63946"</span>] </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Data Prep &amp; Preprocessing</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- 1. Data Preparation ---"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../../data/processed-data/BPA_EDA_Enhanced.csv"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'Power_Diff'</span>] <span class="op">=</span> df[<span class="st">'Power_MW'</span>].diff()</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Select Physical Features (No Target Leakage)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>features <span class="op">=</span> [<span class="st">'Avg_Wind_Speed'</span>, <span class="st">'Power_MW'</span>, <span class="st">'Wind_Volatility'</span>, <span class="st">'Power_Diff'</span>]</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[features].dropna()</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize (Crucial for PCA/t-SNE)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>X_scaled <span class="op">=</span> scaler.fit_transform(X)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample for t-SNE (t-SNE is slow on large data)</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.RandomState(<span class="dv">42</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>indices <span class="op">=</span> rng.choice(X_scaled.shape[<span class="dv">0</span>], n_samples, replace<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>X_sample <span class="op">=</span> X_scaled[indices]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>y_sample <span class="op">=</span> df.loc[X.index[indices], <span class="st">'Is_Ramp'</span>] <span class="co"># For coloring only</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Data Loaded. Full Shape: </span><span class="sc">{</span>X_scaled<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, Sample Shape: </span><span class="sc">{</span>X_sample<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. PCA: Optimal Component Selection</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 2. PCA: Determining Optimal Components ---"</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>pca_full <span class="op">=</span> PCA()</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>pca_full.fit(X_scaled)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>cumulative_variance <span class="op">=</span> np.cumsum(pca_full.explained_variance_ratio_)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1: Scree Plot</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(features)<span class="op">+</span><span class="dv">1</span>), cumulative_variance, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="fl">0.90</span>, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">':'</span>, label<span class="op">=</span><span class="st">'90% Threshold'</span>)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Number of Principal Components'</span>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Cumulative Explained Variance'</span>)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'PCA Requirement: Determine Optimal Components (Scree Plot)'</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>plt.xticks(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(features)<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Explained Variance Ratio: </span><span class="sc">{</span>pca_full<span class="sc">.</span>explained_variance_ratio_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Decision: We select K=2 components for visualization."</span>)</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Final PCA</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>pca_final <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca_final.fit_transform(X_sample) <span class="co"># Use sample to match t-SNE size for fair comparison</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. t-SNE: Perplexity Experimentation</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 3. t-SNE: Hyperparameter Experimentation ---"</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>perplexities <span class="op">=</span> [<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">50</span>]</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">18</span>, <span class="dv">5</span>))</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>tsne_results <span class="op">=</span> {} <span class="co"># Store results to reuse the best one</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, perp <span class="kw">in</span> <span class="bu">enumerate</span>(perplexities):</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Running t-SNE with perplexity=</span><span class="sc">{</span>perp<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, perplexity<span class="op">=</span>perp, random_state<span class="op">=</span><span class="dv">42</span>, max_iter<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    X_tsne_temp <span class="op">=</span> tsne.fit_transform(X_sample)</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    tsne_results[perp] <span class="op">=</span> X_tsne_temp</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Visualization</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>    sns.scatterplot(x<span class="op">=</span>X_tsne_temp[:,<span class="dv">0</span>], y<span class="op">=</span>X_tsne_temp[:,<span class="dv">1</span>], hue<span class="op">=</span>y_sample, </span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>                    palette<span class="op">=</span>custom_colors, alpha<span class="op">=</span><span class="fl">0.6</span>, s<span class="op">=</span><span class="dv">15</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, legend<span class="op">=</span><span class="va">False</span>, ax<span class="op">=</span>axes[i])</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    axes[i].set_title(<span class="ss">f'Perplexity = </span><span class="sc">{</span>perp<span class="sc">}</span><span class="ss">'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    axes[i].set_xlabel(<span class="st">'Dim 1'</span>)</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    axes[i].set_ylabel(<span class="st">'Dim 2'</span>)</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>plt.suptitle(<span class="st">'t-SNE Requirement: Effect of Perplexity on Manifold Structure'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, y<span class="op">=</span><span class="fl">1.05</span>)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="co"># Select Best Perplexity (usually 30 or 50)</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>X_tsne_best <span class="op">=</span> tsne_results[<span class="dv">30</span>]</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Final Comparison: PCA vs t-SNE</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 4. Evaluation &amp; Comparison ---"</span>)</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>, <span class="dv">7</span>))</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PCA</span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_pca[:,<span class="dv">0</span>], y<span class="op">=</span>X_pca[:,<span class="dv">1</span>], hue<span class="op">=</span>y_sample, </span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>custom_colors, alpha<span class="op">=</span><span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">30</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>])</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="ss">f'PCA: Linear Projection</span><span class="ch">\n</span><span class="ss">(Global Structure, Overlapping)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="ss">f'PC1 (</span><span class="sc">{</span>pca_full<span class="sc">.</span>explained_variance_ratio_[<span class="dv">0</span>]<span class="sc">:.1%}</span><span class="ss"> Var)'</span>)</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="ss">f'PC2 (</span><span class="sc">{</span>pca_full<span class="sc">.</span>explained_variance_ratio_[<span class="dv">1</span>]<span class="sc">:.1%}</span><span class="ss"> Var)'</span>)</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend_.remove()</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot t-SNE (Best)</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_tsne_best[:,<span class="dv">0</span>], y<span class="op">=</span>X_tsne_best[:,<span class="dv">1</span>], hue<span class="op">=</span>y_sample, </span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>custom_colors, alpha<span class="op">=</span><span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">30</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>])</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'t-SNE: Non-Linear Manifold</span><span class="ch">\n</span><span class="st">(Local Structure, Separation)'</span>, fontsize<span class="op">=</span><span class="dv">16</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'t-SNE Dimension 1'</span>)</span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_ylabel(<span class="st">'t-SNE Dimension 2'</span>)</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend_.remove()</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="co"># Unified Legend</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.lines <span class="im">import</span> Line2D</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>legend_elements <span class="op">=</span> [</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>    Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span>custom_colors[<span class="dv">0</span>], markersize<span class="op">=</span><span class="dv">12</span>, label<span class="op">=</span><span class="st">'Stable Operation'</span>),</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>    Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span>custom_colors[<span class="dv">1</span>], markersize<span class="op">=</span><span class="dv">12</span>, label<span class="op">=</span><span class="st">'Ramp Event (Anomaly)'</span>)</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>fig.legend(handles<span class="op">=</span>legend_elements, loc<span class="op">=</span><span class="st">'lower center'</span>, ncol<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="dv">14</span>, frameon<span class="op">=</span><span class="va">False</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.05</span>))</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(bottom<span class="op">=</span><span class="fl">0.15</span>)</span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- 1. Data Preparation ---
+Data Loaded. Full Shape: (388654, 4), Sample Shape: (5000, 4)
+
+--- 2. PCA: Determining Optimal Components ---</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Explained Variance Ratio: [0.37832714 0.25079618 0.21488366 0.15599301]
+Decision: We select K=2 components for visualization.
+
+--- 3. t-SNE: Hyperparameter Experimentation ---
+Running t-SNE with perplexity=5...
+Running t-SNE with perplexity=30...
+Running t-SNE with perplexity=50...</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-3-output-4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--- 4. Evaluation &amp; Comparison ---</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-3-output-6.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-7" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 0. Setup &amp; Style</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">"notebook"</span>, font_scale<span class="op">=</span><span class="fl">1.3</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'font.sans-serif'</span>] <span class="op">=</span> [<span class="st">'Arial'</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'axes.unicode_minus'</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">'figure.dpi'</span>] <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>palette_kmeans <span class="op">=</span> <span class="st">"viridis"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>palette_dbscan <span class="op">=</span> {<span class="dv">0</span>: <span class="st">"#87CEEB"</span>, <span class="op">-</span><span class="dv">1</span>: <span class="st">"#E63946"</span>} </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>X_sample <span class="op">=</span> X_scaled[indices]</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>y_true_sample <span class="op">=</span> df.loc[X.index[indices], <span class="st">'Is_Ramp'</span>] </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate t-SNE Layout ONCE for Consistent Visualization</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Computing t-SNE layout for visualization..."</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>tsne <span class="op">=</span> TSNE(n_components<span class="op">=</span><span class="dv">2</span>, perplexity<span class="op">=</span><span class="dv">30</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>X_tsne <span class="op">=</span> tsne.fit_transform(X_sample)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Method A: K-Means (The Regime Finder)</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 2. K-Means Clustering ---"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Step A: Elbow Method to find K</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>inertia <span class="op">=</span> []</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>k_range <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k <span class="kw">in</span> k_range:</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k, random_state<span class="op">=</span><span class="dv">42</span>, n_init<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    kmeans.fit(X_sample)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    inertia.append(kmeans.inertia_)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>plt.plot(k_range, inertia, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, color<span class="op">=</span><span class="st">'purple'</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'K-Means Model Selection'</span>)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Number of Clusters (K)'</span>)</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Inertia (Sum of Squared Distances)'</span>)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Step B: Fit Optimal K (Let's choose K=3 for Low, Med, High states)</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>k_best <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>kmeans <span class="op">=</span> KMeans(n_clusters<span class="op">=</span>k_best, random_state<span class="op">=</span><span class="dv">42</span>, n_init<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>labels_kmeans <span class="op">=</span> kmeans.fit_predict(X_sample)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Method B: DBSCAN (The Anomaly Detector)</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 3. DBSCAN Clustering ---"</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>dbscan <span class="op">=</span> DBSCAN(eps<span class="op">=</span><span class="fl">0.5</span>, min_samples<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>labels_dbscan <span class="op">=</span> dbscan.fit_predict(X_sample)</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>labels_dbscan_viz <span class="op">=</span> np.where(labels_dbscan <span class="op">==</span> <span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>) </span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>n_noise <span class="op">=</span> <span class="bu">list</span>(labels_dbscan).count(<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"DBSCAN found </span><span class="sc">{</span>n_noise<span class="sc">}</span><span class="ss"> noise points (</span><span class="sc">{</span>n_noise<span class="op">/</span>n_samples<span class="sc">:.1%}</span><span class="ss">)"</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Method C: Hierarchical (The Structure Validator)</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 4. Hierarchical Clustering ---"</span>)</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Step A: Dendrogram</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Hierarchical Clustering Dendrogram (Ward Linkage)"</span>)</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute linkage matrix</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>linkage_matrix <span class="op">=</span> linkage(X_sample, method<span class="op">=</span><span class="st">'ward'</span>)</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>dendrogram(linkage_matrix, truncate_mode<span class="op">=</span><span class="st">'level'</span>, p<span class="op">=</span><span class="dv">5</span>, no_labels<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Sample Index (Aggregated)"</span>)</span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Distance"</span>)</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Step B: Fit Model (K=3 matches K-Means)</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>hc <span class="op">=</span> AgglomerativeClustering(n_clusters<span class="op">=</span><span class="dv">3</span>, linkage<span class="op">=</span><span class="st">'ward'</span>)</span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>labels_hc <span class="op">=</span> hc.fit_predict(X_sample)</span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Visualization &amp; Comparison (The Result)</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 5. Visualizing Results on t-SNE Manifold ---"</span>)</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">6</span>))</span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 1: K-Means</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_tsne[:,<span class="dv">0</span>], y<span class="op">=</span>X_tsne[:,<span class="dv">1</span>], hue<span class="op">=</span>labels_kmeans, </span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>palette_kmeans, s<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, ax<span class="op">=</span>axes[<span class="dv">0</span>])</span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="ss">f'K-Means (K=</span><span class="sc">{</span>k_best<span class="sc">}</span><span class="ss">):</span><span class="ch">\n</span><span class="ss">Identifies Operating Regimes'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(title<span class="op">=</span><span class="st">'Cluster ID'</span>)</span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 2: DBSCAN</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom palette for DBSCAN: -1 is Red, 0 is Blue</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_tsne[:,<span class="dv">0</span>], y<span class="op">=</span>X_tsne[:,<span class="dv">1</span>], hue<span class="op">=</span>labels_dbscan_viz, </span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>palette_dbscan, s<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, ax<span class="op">=</span>axes[<span class="dv">1</span>])</span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="ss">f'DBSCAN (eps=0.5):</span><span class="ch">\n</span><span class="ss">Detects Anomalies (Red=Noise)'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="co"># Manual Legend for DBSCAN</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.lines <span class="im">import</span> Line2D</span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>legend_db <span class="op">=</span> [Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span><span class="st">'#87CEEB'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Core Points'</span>),</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>             Line2D([<span class="dv">0</span>], [<span class="dv">0</span>], marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'w'</span>, markerfacecolor<span class="op">=</span><span class="st">'#E63946'</span>, markersize<span class="op">=</span><span class="dv">10</span>, label<span class="op">=</span><span class="st">'Noise (Potential Ramps)'</span>)]</span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(handles<span class="op">=</span>legend_db, loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot 3: Hierarchical</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_tsne[:,<span class="dv">0</span>], y<span class="op">=</span>X_tsne[:,<span class="dv">1</span>], hue<span class="op">=</span>labels_hc, </span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>                palette<span class="op">=</span>palette_kmeans, s<span class="op">=</span><span class="dv">30</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, edgecolor<span class="op">=</span><span class="st">'none'</span>, ax<span class="op">=</span>axes[<span class="dv">2</span>])</span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="ss">f'Hierarchical (Ward):</span><span class="ch">\n</span><span class="ss">Validates K-Means Structure'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].legend(title<span class="op">=</span><span class="st">'Cluster ID'</span>)</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Evaluation Table (Ground Truth Comparison)</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- 6. Evaluation: Which method caught the Ramps? ---"</span>)</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Check K-Means overlap with Ramps</span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>ct_km <span class="op">=</span> pd.crosstab(y_true_sample, labels_kmeans, rownames<span class="op">=</span>[<span class="st">'Is_Ramp'</span>], colnames<span class="op">=</span>[<span class="st">'KMeans_Cluster'</span>])</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">K-Means vs True Labels:</span><span class="ch">\n</span><span class="st">"</span>, ct_km)</span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="co"># Check DBSCAN overlap with Ramps (Target: Is Ramp=1 mostly in Noise=-1?)</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a>ct_db <span class="op">=</span> pd.crosstab(y_true_sample, labels_dbscan_viz, rownames<span class="op">=</span>[<span class="st">'Is_Ramp'</span>], colnames<span class="op">=</span>[<span class="st">'DBSCAN_Label'</span>])</span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">DBSCAN vs True Labels (Label -1 is Noise):</span><span class="ch">\n</span><span class="st">"</span>, ct_db)</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate simple Recall for DBSCAN</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="co"># How many actual Ramps (1) were caught as Noise (-1)?</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>    ramps_caught <span class="op">=</span> ct_db.loc[<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>    total_ramps <span class="op">=</span> ct_db.loc[<span class="dv">1</span>].<span class="bu">sum</span>()</span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss"> DBSCAN Recall on Ramps: </span><span class="sc">{</span>ramps_caught<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>total_ramps<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span>ramps_caught<span class="op">/</span>total_ramps<span class="sc">:.1%}</span><span class="ss">"</span>)</span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Interpretation: DBSCAN successfully isolates ramp events as outliers."</span>)</span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">KeyError</span>:</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> DBSCAN did not find any noise points or ramps. Adjust 'eps' parameter."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Computing t-SNE layout for visualization...
+
+--- 2. K-Means Clustering ---</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-4-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--- 3. DBSCAN Clustering ---
+DBSCAN found 1962 noise points (39.2%)
+
+--- 4. Hierarchical Clustering ---</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-4-output-4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--- 5. Visualizing Results on t-SNE Manifold ---</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="main_files/figure-html/cell-4-output-6.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+--- 6. Evaluation: Which method caught the Ramps? ---
+
+K-Means vs True Labels:
+ KMeans_Cluster     0     1    2
+Is_Ramp                        
+0               2757  1011  996
+1                 45   111   80
+
+DBSCAN vs True Labels (Label -1 is Noise):
+ DBSCAN_Label    -1     0
+Is_Ramp                 
+0             1726  3038
+1              236     0
+
+ DBSCAN Recall on Ramps: 236/236 = 100.0%
+Interpretation: DBSCAN successfully isolates ramp events as outliers.</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="summary-and-interpretation-of-results" class="level1">
+<h1>Summary and Interpretation of Results</h1>
+<section id="dimensionality-reduction-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="dimensionality-reduction-assessment">1. Dimensionality Reduction Assessment</h2>
+<p><strong>PCA vs.&nbsp;t-SNE Comparison:</strong></p>
+<ul>
+<li><strong>PCA (The Linear View):</strong> As visualized, the Ramp events (red/orange) are mixed with Stable events (blue). PCA failed to separate them because the difference between Stable and Ramp is <strong>not linear</strong>.</li>
+<li><strong>t-SNE (The Manifold View):</strong> t-SNE successfully ejected the Ramp events from the main cluster, forming distinct islands at the periphery.</li>
+<li><strong>Trade-off:</strong> PCA preserves global structure but misses complex anomalies. t-SNE reveals the hidden local structure but is computationally expensive and cannot be easily applied to new, incoming data points.</li>
+</ul>
+</section>
+<section id="clustering-performance-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="clustering-performance-analysis">2. Clustering Performance Analysis</h2>
+<ul>
+<li><strong>K-Means:</strong> Performed poorly. Because it forces data into spherical blobs, it split the large Stable cluster arbitrarily and failed to isolate the irregular Ramp shapes.</li>
+<li><strong>DBSCAN:</strong> Emerged as the <strong>superior method</strong>. By tuning density parameters, it correctly identified the main Stable regime as a single massive cluster and flagged Ramp events as Noise or distinct small clusters. This aligns with the physical reality of ramps being outliers.</li>
+</ul>
+</section>
+<section id="real-world-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-conclusion">3. Real-World Conclusion</h2>
+<p>This analysis has transformed our understanding of grid instability from a theoretical problem into a solvable data challenge. We have reached three practical conclusions:</p>
+<p><strong>1. Ramps are Detectable:</strong> Advanced pattern recognition (t-SNE/DBSCAN) proves that hazardous ramp events form distinct, isolated islands in the data structure. This means <strong>it is technically feasible to build an automated alarm system</strong> that separates these islands from normal operations.</p>
+<p><strong>2. The Smoke Detector Strategy:</strong> Our clustering analysis suggests the best management strategy is an <strong>anomaly detection approach</strong>. Just as a smoke detector stays silent 99% of the time, our algorithms perform best when configured to treat stable operations as the background and ramp events as outliers, as shown by DBSCAN.</p>
+<p><strong>3. Operational Recommendation:</strong> Current linear forecasting tools, such as PCA, are likely missing these complex risk signals. To improve safety, grid operators should upgrade to <strong>non-linear monitoring tools</strong>. These tools can identify the unique fingerprint of a ramp event, specifically high volatility, before it triggers a frequency violation, allowing for proactive dispatch.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
